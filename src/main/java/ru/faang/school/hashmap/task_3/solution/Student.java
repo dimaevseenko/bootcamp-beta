@@ -1,8 +1,15 @@
 package ru.faang.school.hashmap.task_3.solution;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.Objects;
 
-public class Student {
+@Data
+@AllArgsConstructor
+public class Student implements Comparable<Student> {
 
     private String name;
 
@@ -10,66 +17,21 @@ public class Student {
 
     private int year;
 
-    public Student(String name, Faculty faculty, int year) {
-        this.name = name;
-        this.faculty = faculty;
-        this.year = year;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", faculty=" + faculty +
-                ", year=" + year +
-                '}';
-    }
-
     public PairOfKeys getPairKeys(){
         return new PairOfKeys(faculty, year);
     }
 
+    @Override
+    public int compareTo(Student o) {
+        return name.compareTo(o.name);
+    }
+
+    @AllArgsConstructor
+    @EqualsAndHashCode
+    @ToString
     public static class PairOfKeys{
         private Faculty faculty;
-
         private int year;
-
-        public PairOfKeys(Faculty faculty, int year) {
-            this.faculty = faculty;
-            this.year = year;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof PairOfKeys that)) return false;
-            return year == that.year && faculty == that.faculty;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(faculty, year);
-        }
-
-        @Override
-        public String toString() {
-            return "PairOfKeys{" +
-                    "faculty=" + faculty +
-                    ", year=" + year +
-                    '}';
-        }
     }
 
     public enum Faculty{

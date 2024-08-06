@@ -1,6 +1,10 @@
 package ru.faang.school.hashmap.task_3.solution;
 
+import lombok.val;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Main {
 
@@ -34,5 +38,12 @@ public class Main {
         groupedStudents.addStudent(new Student("Vasya", Student.Faculty.Gryffindor, 2)).printStudents();
 
         groupedStudents.getAllStudents().printStudents();
+
+        val s = groupedStudents.getAllStudents();
+        Collections.sort(s);
+        s.printStudents();
+
+        s.sort((o1, o2) -> o1.getYear() - o2.getYear());
+        s.printStudents();
     }
 }
